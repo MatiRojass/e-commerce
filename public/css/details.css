@@ -1,0 +1,10 @@
+
+
+
+
+@media screen and (min-width: 650px){
+
+    .detail-title{
+        display: none;
+    }
+}

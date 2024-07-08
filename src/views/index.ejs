@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/79028e5814.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>TechShop</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <main class="container">
+        <section>
+            <h1 class="section-title">Inicio</h1>
+            <ul class="products-list">
+                <% products.forEach(product => { %>
+                    <li class="product-card">
+                        <div class="product-card-image">
+                            <a href="/products/<%= product.id %>" title="<%= product.name %>">
+                                <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
+                            </a>
+                        </div>
+                        <div class="product-card-info">
+                            <a href="/products/<%= product.id %>" title="<%= product.name %>">
+                                
+                                <h3 class="product-name"><%= product.name %></h3>
+                                <div class="price-container">
+                                    <% if (product.sale) { %>
+                                        <div>
+                                            <div>
+                                                <small class="old-price">$<%= product.price %></small>
+                                            </div>
+                                            <div class="price-container">
+                                                <span class="price">$<%= product.price - ((product.discount*product.price)/100) %></span>
+                                                <span class="discount-tag"><%= product.discount %>%</span>
+                                            </div>
+                                        </div>
+                                    <% } else  { %>
+                                        <div class="price-container">
+                                            <span class="price">$<%= product.price %></span>
+                                            
+                                        </div>
+                                    <% } %>
+                                
+                                </div>
+                            </a>
+                            <form action="" class="add-cart-form">
+                                <button class="add-cart">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        </section>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

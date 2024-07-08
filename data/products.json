@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "name": "Samsung Galaxy S24",
+        "img": "/images/samsung-S24.webp",
+        "price": 350,
+        "category": "Phones",
+        "sale": true,
+        "discount": 20,
+        "description": "El Samsung Galaxy S24 cuenta con una pantalla vibrante, cámara de alta resolución y rendimiento superior, ideal para mantenerse conectado y capturar momentos importantes."
+    },
+    {
+        "id": 2,
+        "name": "MacBook Air 13",
+        "img": "/images/macbook-Air13.webp",
+        "price": 350,
+        "category": "Laptops",
+        "sale": true,
+        "discount": 50,
+        "description": "El MacBook Air 13 es una laptop ligera y potente, perfecta para trabajar y estudiar, con una batería de larga duración y pantalla Retina."
+    },
+    {
+        "id": 3,
+        "name": "Smart Tv Lg 50'",
+        "img": "/images/smartTv-Lg50.webp",
+        "price": 350,
+        "category": "Televisions",
+        "sale": false,
+        "discount": 0,
+        "description": "La Smart TV LG de 50 pulgadas ofrece una experiencia visual inmersiva con su resolución 4K y características inteligentes para acceder a tus aplicaciones favoritas."
+    },
+    {
+        "id": 4,
+        "name": "Chromecast 4",
+        "img": "/images/chromecast4.webp",
+        "price": 200,
+        "category": "Gadgets",
+        "sale": true,
+        "discount": 15,
+        "description": "El Chromecast 4 permite transmitir contenido desde tu dispositivo móvil a tu TV de manera fácil y rápida, compatible con múltiples aplicaciones de streaming."
+    },
+    {
+        "id": 5,
+        "name": "Samsung Galaxy A05",
+        "img": "/images/samsung-a05.webp",
+        "price": 400,
+        "category": "Phones",
+        "sale": false,
+        "discount": 0,
+        "description": "El Samsung Galaxy A05 ofrece una excelente relación calidad-precio con su pantalla grande, buena cámara y rendimiento sólido para las tareas diarias."
+    },
+    {
+        "id": 6,
+        "name": "PlayStation 5",
+        "img": "/images/ps5.webp",
+        "price": 1000,
+        "category": "Consoles",
+        "sale": false,
+        "discount": 0,
+        "description": "La PlayStation 5 es la consola de última generación de Sony, con gráficos impresionantes, tiempos de carga rápidos y una biblioteca de juegos de alta calidad."
+    },
+    {
+        "id": 7,
+        "name": "Iphone 15 Pro",
+        "img": "/images/iphone-15pro.webp",
+        "price": 2300,
+        "category": "Phones",
+        "sale": false,
+        "discount": 0,
+        "description": "El iPhone 15 Pro es el último modelo de Apple, con tecnología avanzada, cámaras mejoradas y un diseño elegante, perfecto para los entusiastas de la tecnología."
+    }
+]

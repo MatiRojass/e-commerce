@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/details.css">
+    <title>TechShop</title>
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="container">
+        <section>
+            <div class="product-name-container">
+                <h1 class="product-detail-name"><%= product.name %></h1>
+            </div>
+            <div class="product-detail-container">
+                <div class="product-detail-image">
+                    <img src="<%= product.img %>" alt="<%= product.name %>">
+                </div>
+            </div>
+            <div class="product-detail-info">
+                <% if (product.sale) { %>
+                    <div>
+                        <div>
+                            <small class="old-price">$<%= product.price %></small>
+                        </div>
+                        <div class="price-container">
+                            <span class="price">$<%= product.price - ((product.discount*product.price)/100) %></span>
+                            <span class="discount-tag"><%= product.discount %>%</span>
+                        </div>
+                    </div>
+                <% } else  { %>
+                    <div class="price-container">
+                        <span class="price">$<%= product.price %></span>
+                    </div>
+                <% } %>
+            </div>
+
+        </section>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>

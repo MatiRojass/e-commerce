@@ -1,0 +1,18 @@
+{
+  "name": "techshop",
+  "version": "1.0.0",
+  "description": "e-commerce project",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matias Rojas",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}
