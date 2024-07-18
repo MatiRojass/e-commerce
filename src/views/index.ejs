@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,52 +8,177 @@
     <link rel="stylesheet" href="/css/styles.css">
     <title>TechShop</title>
 </head>
+
 <body>
     <%- include('./partials/header.ejs') %>
-    <main class="container">
-        <section>
-            <h1 class="section-title">Inicio</h1>
-            <ul class="products-list">
-                <% products.forEach(product => { %>
-                    <li class="product-card">
-                        <div class="product-card-image">
-                            <a href="/products/<%= product.id %>" title="<%= product.name %>">
-                                <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
-                            </a>
-                        </div>
-                        <div class="product-card-info">
-                            <a href="/products/<%= product.id %>" title="<%= product.name %>">
+        <main class="container">
+            <section class="search-section">
+                <form action="/products" method="get">
+                    <div class="search-bar">
+                        <input type="search" class="search-input" name="search" placeholder="Buscar producto...">
+                        <button type="submit" class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <section class="ads">
+                <div class="ads-slider">
+                    <picture class="banner-frame">
+                        <a href="/products?category=mobile">
+                            <img src="/assets/banners/phones-discount.png" alt="">
+                        </a>
+                    </picture>
+                    <picture class="banner-frame">
+                        <a href="/products?category=mobile">
+                            <img src="/assets/banners/samsung-notebook-promo.png" alt="">
+                        </a>
+                    </picture>
+                </div>
+            </section>
+            <section class="categories-section">
+                <ul class="categories-list">
+                    <a href="">
+                        <li class="category-item">
+                            <img src="/assets/illustrations/computer-3d.png" alt="">
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="category-item">
+                            <img src="/assets/illustrations/phone-3d.png" alt="">
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="category-item">
+                            <img src="/assets/illustrations/console-3d.png" alt="">
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="category-item">
+                            <img src="/assets/illustrations/tv-3d.png" alt="">
+                        </li>
+                    </a>
+                </ul>
+            </section>
+            <section class="products-section">
+                <header class="products-section-header">
+                    <h2>OFERTAS</h2>
+                    <a href="/products?onsale=true">Ver mas →</a>
+                </header>
+                <div class="products-container">
+                    <% onsales.forEach( product => { %>
+                        <article class="product">
+                            <picture class="product-image-container">
+                                <a href="/products/<%= product.id %>">
+                                    <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
+                                </a>
+                            </picture>
+                            <div class="product-card-info">
+                                <div class="product-name">
+                                    <a href="/products/<%= product.id %>">
+                                        <h3><%= product.name %></h3>
+                                    </a>
+                                </div>
                                 
-                                <h3 class="product-name"><%= product.name %></h3>
-                                <div class="price-container">
-                                    <% if (product.sale) { %>
-                                        <div>
-                                            <div>
-                                                <small class="old-price">$<%= product.price %></small>
-                                            </div>
-                                            <div class="price-container">
-                                                <span class="price">$<%= product.price - ((product.discount*product.price)/100) %></span>
-                                                <span class="discount-tag"><%= product.discount %>%</span>
-                                            </div>
-                                        </div>
-                                    <% } else  { %>
-                                        <div class="price-container">
-                                            <span class="price">$<%= product.price %></span>
-                                            
+                                <div class="tags">
+                                    <div class="old-price">
+                                        <small>$<%= product.price %></small>
+                                    </div>
+                                    <% if (product.shipping) { %>
+                                        <div class="free-shipping">
+                                            <small>Envio gratis</small>
                                         </div>
                                     <% } %>
-                                
                                 </div>
-                            </a>
-                            <form action="" class="add-cart-form">
-                                <button class="add-cart">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
-                            </form>
-                        </div>
-                    </li>
-                <% }) %>
-            </ul>
-        </section>
-    </main>
-    <%- include('./partials/footer.ejs') %>
+                                <div class="product-price">
+                                    <strong>$<%= product.price - ((product.discount * product.price) / 100) %></strong>
+                                    <span class="discount-tag"><%= product.discount %>%</span>
+                                </div>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            </section>
+            <section class="products-section">
+                <header class="products-section-header">
+                    <h2>DESTACADOS</h2>
+                    <a href="/products?featured=true">Ver mas →</a>
+                </header>
+                <div class="products-container">
+                    <% featureds.forEach( product => { %>
+                        <article class="product">
+                            <picture class="product-image-container">
+                                <a href="/products/<%= product.id %>">
+                                    <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
+                                </a>
+                            </picture>
+                            <div class="product-card-info">
+                                <div class="product-name">
+                                    <a href="/products/<%= product.id %>">
+                                        <h3><%= product.name %></h3>
+                                    </a>
+                                </div>
+                                <% if (product.sale || product.shipping) { %>
+                                    <div class="tags">
+                                        <% if (product.sale) { %>
+                                            <div class="old-price">
+                                                <small>$<%= product.price %></small>
+                                            </div>
+                                        <% } %>
+                                        <% if (product.shipping) { %>
+                                            <div class="free-shipping">
+                                                <small>Envio gratis</small>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% } %>
+                                <div class="product-price">
+                                    <% if (product.sale) { %>
+                                        <strong>$<%= product.price - ((product.discount * product.price) / 100) %></strong>
+                                        <span class="discount-tag"><%= product.discount %>%</span>
+                                    <% }else{ %>
+                                        <strong>$<%= product.price %></strong>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            </section>
+            
+        </main>
+        <%- include('./partials/footer.ejs') %>
+        <!-- <script>
+            const slider = document.querySelector(".ads-slider");
+            const frames = document.querySelectorAll(".banner-frame");
+            const frameWidth = frames[0].getBoundingClientRect().width;
+            const totalFrames = frames.length;
+            let currentIndex = 0;
+
+            const scrollToFrame = (index) => {
+                slider.scrollTo({
+                    left: index * frameWidth,
+                    behavior: 'smooth'
+                });
+            };
+
+            const autoScroll = () => {
+                currentIndex = (currentIndex + 1) % totalFrames;
+                scrollToFrame(currentIndex);
+            };
+
+            setInterval(autoScroll, 10000);
+
+            slider.addEventListener("wheel", (e) => {
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+
+                    const direction = e.deltaY > 0 ? 1 : -1;
+                    currentIndex = (currentIndex + direction + totalFrames) % totalFrames;
+                    scrollToFrame(currentIndex);
+                }
+            });
+        </script> -->
 </body>
+
 </html>
