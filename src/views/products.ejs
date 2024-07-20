@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/79028e5814.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/products.css">
+    <title>TechShop</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="container">
+        <section class="search-section">
+            <form action="/products" method="get">
+                <div class="search-bar">
+                    <input type="search" class="search-input" name="search" placeholder="Buscar producto..." value="<%= searchQuery ? searchQuery : "" %>">
+                    <button type="submit" class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <div class="filters-buttons">
+                    <div>
+                        <label for="sort-by">Ordenar por</label>
+                        <select name="sort-by" id="sort-by">
+                            <option>Sin orden</option>
+                            <option value="">Precio ASC</option>
+                            <option value="">Precio DESC</option>
+                            <option value="">Nombre A-Z</i></option>
+                            <option value="">Nombre Z-A</i></option>
+                        </select>
+                    </div>
+                    <div class="filters-button-container">
+                        <label for="filters-button">Filtros</label>
+                        <button type="button" id="filters-button" class="filters-button"><i class="fa-solid fa-filter"></i></button>
+                    </div>
+                </div>
+
+                <div class="filters-menu hidden" id="filters-menu">
+                    <div class="filters-container">
+                        <label>Precio</label>
+                        <div class="price-filters-menu">
+                            <div>
+                                min -  <input class="price-filter-input" type="number" id="min-price" name="min" min="0" value="<%= minQuery ? minQuery : "" %>">
+                            </div>
+                            <div>
+                                max - <input class="price-filter-input" type="number" name="max" min="0" value="<%= maxQuery ? maxQuery : "" %>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filters-container">
+                        <label for="onsale">En oferta</label>
+                        <input type="checkbox" name="onsale" id="onsale" <%= onsaleQuery ? "checked" : "" %>>
+                    </div>
+                    <div class="filters-container">
+                        <label for="free-shipping">Envio gratis</label>
+                        <input type="checkbox" name="freeshipping" id="free-shipping" <%= freeshippingQuery ? "checked" : "" %>>
+                    </div>
+                    <div class="filters-container">
+                        <label for="category">Categoria</label>
+                        <select name="category" id="category">
+                            <option value="">Ninguna</option>
+                            <% categories.forEach(category => { %>
+                             <option value="<%= category %>" <%= (categoryQuery && category == categoryQuery) ? "selected" : "" %> ><%= category %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="apply-filters">
+                        <button type="submit">Aplicar filtros</button>
+                    </div>
+                </div>
+                
+            </form>
+        </section>
+        <section class="products-results">
+            <header class="products-section-header">
+                <h2>RESULTADOS</h2>
+            </header>
+            <div>
+                <ul class="products-list">
+                    <% products.forEach(product => { %>
+                     <li>
+                        <article class="product">
+                            <picture class="product-image-container">
+                                <a href="/products/<%= product.id %>">
+                                    <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
+                                </a>
+                            </picture>
+                            <div class="product-card-info">
+                                <div class="product-name">
+                                    <a href="/products/<%= product.id %>">
+                                        <h3><%= product.name %></h3>
+                                    </a>
+                                </div>
+                                
+                                <% if (product.sale || product.shipping) { %>
+                                    <div class="tags">
+                                        <% if (product.sale) { %>
+                                            <div class="old-price">
+                                                <small>$<%= product.price %></small>
+                                            </div>
+                                        <% } %>
+                                        <% if (product.shipping) { %>
+                                            <div class="free-shipping">
+                                                <small>Envio gratis</small>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% } %>
+                                <div class="product-price">
+                                    <strong>$<%= product.price - ((product.discount * product.price) / 100) %></strong>
+                                    <% if (product.sale) { %>
+                                        <span class="discount-tag"><%= product.discount %>%</span>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </article>
+                     </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+        const filterButton = document.getElementById("filters-button")
+        const filtersMenu = document.getElementById("filters-menu")
+
+        filterButton.addEventListener("click", ()=>{
+            filtersMenu.classList.toggle("hidden")
+        })
+
+    </script>
+</body>
+</html>

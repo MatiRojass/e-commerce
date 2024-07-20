@@ -9,7 +9,7 @@ const products = JSON.parse(readFileSync(join(__dirname, "../../data/products.js
 const categories = [...new Set(products.map(product => product.category))]
 
 export function all(req, res){
-    const {search, max, category, onsale} = req.query
+    const {search, min, max, category, onsale, freeshipping} = req.query
 
     
     let productsFiltered = products
@@ -18,19 +18,53 @@ export function all(req, res){
         productsFiltered = productsFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))  
     }
 
-    if(max && max>0){
-        productsFiltered = productsFiltered.filter(product => product.price <= max)  
+    if(min && min>0){
+        productsFiltered = productsFiltered.filter(product => {
+            let price = product.price
+            
+            if(product.onsale){
+                price = (price * product.discount)/100
+            }
+
+            return price >= min
+        })  
     }
 
+    if(max && max>0){
+        productsFiltered = productsFiltered.filter(product => {
+            let price = product.price
+            
+            if(product.onsale){
+                price = (price * product.discount)/100
+            }
+
+            return price <= max
+        })  
+    }
+    
+    if(freeshipping && onsale){
+        productsFiltered = productsFiltered.filter(product => product.shipping && product.sale)
+    }else if(freeshipping){
+        productsFiltered = productsFiltered.filter(product => product.shipping)
+    }else if(onsale){
+        productsFiltered = productsFiltered.filter(product => product.sale)
+    }
+    
     if(category){
         productsFiltered = productsFiltered.filter(product => product.category == category)
     }
 
-    if(onsale && onsale=="true"){
-        productsFiltered = productsFiltered.filter(product => product.sale)
-    }
 
-    res.render("products", {products: productsFiltered, categories, maxQuery: max, categoryQuery: category, onsaleQuery: onsale})
+    res.render("products", {
+        products: productsFiltered, 
+        categories,
+        minQuery: min,
+        maxQuery: max,
+        searchQuery: search,
+        categoryQuery: category,
+        onsaleQuery: onsale,
+        freeshippingQuery: freeshipping
+    })
 }
 
 export function details(req, res){

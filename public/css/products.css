@@ -1,0 +1,124 @@
+.filters-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 1em;
+}
+
+.filters-button{
+    border: none;
+    border-radius: 50%;
+    padding: 10px 12px;
+    background-color: var(--medium-gray);
+}
+
+.filters-button-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.apply-filters{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+
+    & button{
+        border: solid 1.5px var(--fucsia);
+        color: var(--fucsia);
+        border-radius: 10px;
+        background-color: transparent;
+        padding: 5px 13px;
+        transition: all .2s ease-in-out;
+    }
+
+    & button:hover{
+      background-color: var(--fucsia);
+      color: white;
+    }
+}
+
+.product-name{
+    font-size: 12px;
+}
+
+.products-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product{
+    background-color: var(--medium-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.product-price{
+  font-size: x-large;
+}
+
+.tags{
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+
+  & .old-price{
+    font-size: large;
+    margin-right: 0;
+    margin-top: auto;
+  }
+
+  & .free-shipping{
+    display: flex;
+    margin-left: 0;
+    margin-bottom: auto;
+  }
+}
+
+.product-image-container{
+  display: flex;
+  width: 120px;
+  margin: 0;
+}
+  
+.product-image-container img{
+  width: 120px;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}
+
+
+/* FILTERS MENU */
+.filters-menu{
+  background-color: var(--light-gray);
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.price-filters-menu{
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#min-price{
+  margin-left: 3px;
+}
+
+.price-filter-input{
+  width: 80px;
+  outline: none;
+  border: solid 1px var(--medium-gray);
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.filters-container{
+  margin-bottom: 10px;
+}
