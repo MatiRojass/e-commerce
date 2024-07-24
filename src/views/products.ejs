@@ -23,13 +23,13 @@
 
                 <div class="filters-buttons">
                     <div>
-                        <label for="sort-by">Ordenar por</label>
-                        <select name="sort-by" id="sort-by">
+                        <label for="sortby">Ordenar por</label>
+                        <select name="sortby" id="sort-by">
                             <option>Sin orden</option>
-                            <option value="">Precio ASC</option>
-                            <option value="">Precio DESC</option>
-                            <option value="">Nombre A-Z</i></option>
-                            <option value="">Nombre Z-A</i></option>
+                            <option value="price-asc" <%= (sortByQuery && sortByQuery == "price-asc") ? "selected" : "" %> >Precio ASC</option>
+                            <option value="price-desc" <%= (sortByQuery && sortByQuery == "price-desc") ? "selected" : "" %> >Precio DESC</option>
+                            <option value="name-asc" <%= (sortByQuery && sortByQuery == "name-asc") ? "selected" : "" %> >Nombre A-Z</i></option>
+                            <option value="name-desc" <%= (sortByQuery && sortByQuery == "name-desc") ? "selected" : "" %> >Nombre Z-A</i></option>
                         </select>
                     </div>
                     <div class="filters-button-container">
@@ -68,7 +68,8 @@
                         </select>
                     </div>
                     <div class="apply-filters">
-                        <button type="submit">Aplicar filtros</button>
+                        <button type="submit" class="apply-filters-button">Aplicar</button>
+                        <button type="reset" class="clear-filters-button">Limpiar</button>
                     </div>
                 </div>
                 
@@ -79,47 +80,54 @@
                 <h2>RESULTADOS</h2>
             </header>
             <div>
-                <ul class="products-list">
-                    <% products.forEach(product => { %>
-                     <li>
-                        <article class="product">
-                            <picture class="product-image-container">
-                                <a href="/products/<%= product.id %>">
-                                    <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
-                                </a>
-                            </picture>
-                            <div class="product-card-info">
-                                <div class="product-name">
-                                    <a href="/products/<%= product.id %>">
-                                        <h3><%= product.name %></h3>
+                <% if (products.length == 0) { %>
+                    <div class="no-search-results">
+                        <strong>Sin resultados</strong>
+                        <p>Intenta otra busqueda o modifica los filtros</p>
+                    </div>
+                <% }else{ %>
+                    <ul class="products-list">
+                        <% products.forEach(product => { %>
+                        <li>
+                            <article class="product">
+                                <picture class="product-image-container">
+                                    <a href="/products/<%= product.id %>" class="image-link-container">
+                                        <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
                                     </a>
-                                </div>
-                                
-                                <% if (product.sale || product.shipping) { %>
-                                    <div class="tags">
+                                </picture>
+                                <div class="product-card-info">
+                                    <div class="product-name">
+                                        <a href="/products/<%= product.id %>">
+                                            <h3><%= product.name %></h3>
+                                        </a>
+                                    </div>
+                                    
+                                    <% if (product.sale || product.shipping) { %>
+                                        <div class="tags">
+                                            <% if (product.sale) { %>
+                                                <div class="old-price">
+                                                    <small>$<%= product.price %></small>
+                                                </div>
+                                            <% } %>
+                                            <% if (product.shipping) { %>
+                                                <div class="free-shipping">
+                                                    <small>Envio gratis</small>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
+                                    <div class="product-price">
+                                        <strong>$<%= product.price - ((product.discount * product.price) / 100) %></strong>
                                         <% if (product.sale) { %>
-                                            <div class="old-price">
-                                                <small>$<%= product.price %></small>
-                                            </div>
-                                        <% } %>
-                                        <% if (product.shipping) { %>
-                                            <div class="free-shipping">
-                                                <small>Envio gratis</small>
-                                            </div>
+                                            <span class="discount-tag"><%= product.discount %>%</span>
                                         <% } %>
                                     </div>
-                                <% } %>
-                                <div class="product-price">
-                                    <strong>$<%= product.price - ((product.discount * product.price) / 100) %></strong>
-                                    <% if (product.sale) { %>
-                                        <span class="discount-tag"><%= product.discount %>%</span>
-                                    <% } %>
                                 </div>
-                            </div>
-                        </article>
-                     </li>
-                    <% }) %>
-                </ul>
+                            </article>
+                        </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
             </div>
         </section>
     </main>
