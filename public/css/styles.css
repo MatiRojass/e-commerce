@@ -22,6 +22,34 @@ a:hover{
   text-decoration: underline;
 }
 
+button.primary-btn {
+  padding: 5px 20px;
+  transition: all .2s ease-in-out;
+  border-radius: 10px;
+  border: solid 1.5px var(--fucsia);
+  color: white;
+  background-color: var(--fucsia);
+
+}
+
+button.primary-btn:hover {
+  border-color: white;
+}
+
+button.secondary-btn {
+  padding: 5px 20px;
+  transition: all .2s ease-in-out;
+  border-radius: 10px;
+  border: solid 1.5px var(--fucsia);
+  color: var(--fucsia);
+  background-color: transparent;
+}
+
+button.secondary-btn:hover {
+  background-color: #333;
+}
+
+
 * {
   margin: 0;
   padding: 0;

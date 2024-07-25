@@ -2,6 +2,13 @@ import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { dirname, join } from "node:path"
 
+function discountCalc(precio, desc){
+    
+    const oferta = precio - ((precio*desc)/100) 
+
+    return oferta
+}
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -17,10 +24,18 @@ export function all(req, res) {
     if (sortby) {
         switch (sortby) {
             case "price-asc":
-                productsFiltered = productsFiltered.sort((a, b) => a.price - b.price)
+                productsFiltered = productsFiltered.sort((a, b) => {
+                    const priceA = a.sale ? discountCalc(a.price, a.discount) : a.price
+                    const priceB = b.sale ? discountCalc(b.price, b.discount) : b.price
+                    
+                    return priceA - priceB})
                 break;
             case "price-desc":
-                productsFiltered = productsFiltered.sort((a, b) => b.price - a.price)
+                productsFiltered = productsFiltered.sort((a, b) => {
+                    const priceB = b.sale ? discountCalc(b.price, b.discount) : b.price
+                    const priceA = a.sale ? discountCalc(a.price, a.discount) : a.price
+                    
+                    return priceB - priceA })
                 break;
             case "name-asc":
                 productsFiltered = productsFiltered.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
@@ -37,24 +52,14 @@ export function all(req, res) {
 
     if (min && min > 0) {
         productsFiltered = productsFiltered.filter(product => {
-            let price = product.price
-
-            if (product.sale) {
-                price = (price * product.discount) / 100
-            }
-
+            const price = product.sale ? discountCalc(product.price, product.discount) : product.price
             return price >= min
         })
     }
 
     if (max && max > 0) {
         productsFiltered = productsFiltered.filter(product => {
-            let price = product.price
-
-            if (product.sale) {
-                price = (price * product.discount) / 100
-            }
-
+            const price = product.sale ? discountCalc(product.price, product.discount) : product.price
             return price <= max
         })
     }

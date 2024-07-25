@@ -1,0 +1,64 @@
+.details-title{
+    font-size: 18px;
+    margin-block: 1em;
+}
+
+.details-container{
+    background-color: var(--medium-gray);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.details-image-container{
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    
+    & img{
+        object-fit: contain;
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
+}
+
+.primary-btn{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.tags{
+    
+    & .old-price{
+        font-size: 25px;
+    }
+
+    & .free-shipping{
+        font-size: 15px;
+    }
+}
+
+.details-price{
+    
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    & .discount-tag{
+        font-size: 1em;
+    }
+
+    & .details-price{
+        font-size: 2em;
+    }
+}
+
+.buy-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-block: 1em;
+}

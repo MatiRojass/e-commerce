@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/79028e5814.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/details.css">
+    <title>TechShop</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="container">
+
+        <h1 class="details-title"><%= product.name %></h1>
+        <div class="details-container">
+            <article class="details">
+                <picture class="details-image-container">
+                    <img src="<%= product.img %>" alt="<%= product.name %>" title="<%= product.name %>">
+                </picture>
+                <div class="details-info">
+                    <% if (product.sale || product.shipping) { %>
+                        <div class="tags">
+                            <% if (product.sale) { %>
+                                <div class="old-price">
+                                    <small>$<%= product.price %></small>
+                                </div>
+                            <% } %>
+                            <% if (product.shipping) { %>
+                                <div class="free-shipping">
+                                    <small>Envio gratis</small>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                    <div class="details-price">
+                        <% if (product.sale) { %>
+                            <strong class="details-price">$<%= product.price - ((product.discount * product.price) / 100) %></strong>
+                            <span class="discount-tag"><%= product.discount %>%</span>
+                        <% }else{ %>
+                            <strong>$<%= product.price %></strong>
+                        <% } %>
+                    </div>
+                    <div class="buy-buttons">
+                        <button class="primary-btn">Comprar</button>
+                        <button class="secondary-btn">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </article>
+            <h3>Descripcion:</h3>
+            <div>
+                <p><%= product.description %></p>
+            </div>
+        </div>
+
+    </main>
+            
+        
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>
