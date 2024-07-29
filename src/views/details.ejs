@@ -34,23 +34,26 @@
                             <% } %>
                         </div>
                     <% } %>
-                    <div class="details-price">
+                    <div class="details-price-container">
                         <% if (product.sale) { %>
                             <strong class="details-price">$<%= product.price - ((product.discount * product.price) / 100) %></strong>
                             <span class="discount-tag"><%= product.discount %>%</span>
                         <% }else{ %>
-                            <strong>$<%= product.price %></strong>
+                            <strong class="details-price">$<%= product.price %></strong>
                         <% } %>
                     </div>
                     <div class="buy-buttons">
                         <button class="primary-btn">Comprar</button>
                         <button class="secondary-btn">Agregar al Carrito</button>
                     </div>
+                    <div>
+                        <h3>Descripcion:</h3>
+                        <p><%= product.description %></p>
+                    </div>
                 </div>
             </article>
-            <h3>Descripcion:</h3>
             <div>
-                <p><%= product.description %></p>
+
             </div>
         </div>
 

@@ -102,6 +102,27 @@ header.top-header {
   }
 }
 
+.logo-container{
+  
+  & a{
+    text-decoration: none;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+.logo{
+  transition: all 1s ease-in-out;
+}
+
+.logo:hover{
+  color: #D863B7;
+  scale: 1.3;
+}
+
+
 section {
   margin: 1.5em 0;
 }

@@ -31,17 +31,22 @@
 }
 
 .tags{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
     & .old-price{
+        margin: 0;
         font-size: 25px;
     }
 
     & .free-shipping{
+        margin: 0;
         font-size: 15px;
     }
 }
 
-.details-price{
+.details-price-container{
     
     display: flex;
     align-items: center;
@@ -61,4 +66,20 @@
     justify-content: center;
     gap: 1em;
     margin-block: 1em;
+}
+
+@media (min-width: 768px){
+
+  article.details{
+    display: flex;
+  }  
+
+  picture.details-image-container{
+    width: 50%;
+  }
+
+  div.details-info{
+    flex: 1;
+    padding-left: 10px;
+  }
 }
